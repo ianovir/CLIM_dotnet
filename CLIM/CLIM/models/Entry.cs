@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CLIM.models
 {
+    /// <summary>
+    /// An Entry is the basic element composing a menu.
+    /// </summary>
     public class Entry
     {
 
@@ -16,6 +19,9 @@ namespace CLIM.models
             Visible = true;
         }
 
+        /// <summary>
+        /// The action (to be implemented) for the entry
+        /// </summary>
         public Action OnAction;
 
     }

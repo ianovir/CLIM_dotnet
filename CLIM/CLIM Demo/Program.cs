@@ -76,7 +76,7 @@ namespace CLIM_Demo
             engine.Start();
 
             //just blocking...
-             while (engine.GetRunning()) { }
+             while (engine.IsRunning()) { }
 
 
         }

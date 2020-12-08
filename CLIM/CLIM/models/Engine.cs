@@ -6,6 +6,11 @@ using System.Threading;
 
 namespace CLIM.models
 {
+    /// <summary>
+    /// The choreographer of the menus' stack.
+    /// By default, input and output streams are the ScannerInputStream and
+    /// SystemOutputStream respectively
+    /// </summary>
     public class Engine {
 
         public string Name { get; protected set; }
@@ -28,12 +33,19 @@ namespace CLIM.models
             syncLock = new object();
         }
 
+        /// <summary>
+        /// Adds a menu on the top of the stack
+        /// </summary>
+        /// <param name="subMenu">the new menu to be added</param>
         public void AddOnTop(Menu subMenu)
         {
             menus.Push(subMenu);
             CurrentMenu = menus.Peek();
         }
 
+        /// <summary>
+        /// Removes the menu on top
+        /// </summary>
         public void PopMenu() {
             if (menus.Count > 1) {
                 menus.Pop();
@@ -41,7 +53,10 @@ namespace CLIM.models
             CurrentMenu = menus.Peek();
         }
 
-
+        /// <summary>
+        /// Forces the call to the action corresponding to the chosen entry
+        /// </summary>
+        /// <param name="entry">the index of the entry in the current menu</param>
         public void OnChoice(int entry) {
             CurrentMenu.OnChoice(entry);
             if (CurrentMenu.IsRemoved) {
@@ -59,14 +74,30 @@ namespace CLIM.models
             }
         }
 
+        /// <summary>
+        /// Creates a new menu referencing the current engine;
+        /// Note that the menu won't be added to the stack automatically.
+        /// </summary>
+        /// <param name="name">the name of the new menu</param>
+        /// <returns>the new built menu</returns>
         public Menu BuildMenu(string name) {
             return new Menu(name, this);
         }
 
+        /// <summary>
+        /// Creates a new menu referencing the current engine; 
+        /// Note that the menu won't be added to the stack automatically.
+        /// </summary>
+        /// <param name="name">the name of the new menu</param>
+        /// <param name="exitText">the text for the exit entry</param>
+        /// <returns>the new built menu</returns>
         public Menu BuildMenu(string name, string exitText) {
             return new Menu(name, exitText, this);
         }
 
+        /// <summary>
+        /// Starts the current engine
+        /// </summary>
         public void Start()
         {
             lock (syncLock) {
@@ -78,6 +109,9 @@ namespace CLIM.models
             }
         }
 
+        /// <summary>
+        /// Stops the current engine
+        /// </summary>
         public void Stop() {
             lock (syncLock) {
                 running= false;
@@ -86,17 +120,25 @@ namespace CLIM.models
             }
         }
 
-        public bool GetRunning()
+        public bool IsRunning()
         {
             lock (syncLock) { 
                 return running;
             }
         }
 
+        /// <summary>
+        /// Forces the inputstream to be read
+        /// </summary>
+        /// <returns>the read line</returns>
         public string ForceRead() {
             return InStream.ForceRead();
         }
 
+        /// <summary>
+        /// Sends a message to the outputstream
+        /// </summary>
+        /// <param name="msg">the content to show</param>
         public void Print(string msg) {
             OutStream.OnOutput(msg);
         }
