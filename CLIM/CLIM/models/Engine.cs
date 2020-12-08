@@ -86,7 +86,7 @@ namespace CLIM.models
             }
         }
 
-        public bool IsRunning()
+        public bool GetRunning()
         {
             lock (syncLock) { 
                 return running;

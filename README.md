@@ -3,7 +3,7 @@ CLIM for .NET core
 
 Command line interface menu (CLIM) engine for .NET core offers a very simple system to manage UI menus via the cli.
 
-![p1](https://github.com/ianovir/CLIM_dotnet/blob/master/pics/ctrl_console.jpg)
+![p1](https://github.com/ianovir/CLIM_dotnet/blob/main/pics/ctrl_console.jpg)
 
 # Motivation
 
