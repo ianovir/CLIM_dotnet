@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>ianovir</Authors>
+    <Product>CLIM dotnet</Product>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Copyright>Copyright 2020 - ianovir.com</Copyright>
+    <Description>Command line interface menu engine for .net core.</Description>
+    <PackageId>CLIM</PackageId>
+    <Company>ianovir.com</Company>
+    <PackageIcon></PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>1.2.0</Version>
+  </PropertyGroup>
+
+</Project>
