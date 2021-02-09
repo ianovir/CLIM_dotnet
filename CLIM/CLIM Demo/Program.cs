@@ -11,7 +11,7 @@ namespace CLIM_Demo
         {
             List<string> values = new List<string>();
 
-            Engine engine = new Engine("CLIM .net demo");
+            Engine engine = new Engine("CLIM .net core demo");
 
             Menu mainMenu = engine.BuildMenu("Main menu");
             mainMenu.Description = "List of strings example";

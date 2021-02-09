@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIM", "CLIM\CLIM.csproj", "{402F388A-DC96-429B-A921-21AD0F09BF0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLIM", "CLIM\CLIM.csproj", "{402F388A-DC96-429B-A921-21AD0F09BF0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIM Demo", "CLIM Demo\CLIM Demo.csproj", "{E0D6A426-FA92-4147-A339-3BA103838544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLIM Demo", "CLIM Demo\CLIM Demo.csproj", "{E0D6A426-FA92-4147-A339-3BA103838544}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIM_FW", "CLIM FW\CLIM_FW.csproj", "{7598C32C-3533-4829-9586-D9528CA699DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E0D6A426-FA92-4147-A339-3BA103838544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0D6A426-FA92-4147-A339-3BA103838544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0D6A426-FA92-4147-A339-3BA103838544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7598C32C-3533-4829-9586-D9528CA699DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7598C32C-3533-4829-9586-D9528CA699DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7598C32C-3533-4829-9586-D9528CA699DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7598C32C-3533-4829-9586-D9528CA699DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
