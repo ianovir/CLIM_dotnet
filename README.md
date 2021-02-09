@@ -1,7 +1,7 @@
-CLIM for .NET core
+CLIM for .NET
 =======
 
-Command line interface menu (CLIM) engine for .NET core offers a very simple system to manage UI menus via the cli.
+Command line interface menu (CLIM) engine for .NET core and .NET Framework offers a very simple system to manage UI menus via the cli.
 
 ![p1](https://github.com/ianovir/CLIM_dotnet/blob/main/pics/ctrl_console.jpg)
 
@@ -14,13 +14,24 @@ CLIM may be useful when prototyping core libraries in their early stage, in abse
 You can download the last compiled version of `CLIM` from the [releases](https://github.com/ianovir/CLIM_dotnet/releases) page, or import it from nuget.
 
 ## Nuget
+For .NET core projects:
 ```
 PM> Install-Package CLIM
 ``` 
 
+For .NET Framework projects:
+```
+PM> Install-Package CLIM_FW
+``` 
+
 ## .NET CLI
+For .NET core projects:
 ```
 > dotnet add package CLIM
+```
+For .NET Framework projects:
+```
+> dotnet add package CLIM_FW
 ```
 
 # Usage
