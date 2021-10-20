@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>CLIM</id>
+    <version>$version$</version>
+    <title>CLIM .net core</title>
+    <authors>ianovir</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/ianovir/CLIM_dotnet</projectUrl>
+    <iconUrl>https://ianovir.com/wp-content/uploads/2020/12/clim_icon.png</iconUrl>
+    <description>Command line interface menu engine for .net core</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2021 - ianovir.com</copyright>
+    <tags>CLI CLIM menu .net_core ianovir</tags>
+  </metadata>
+</package>
