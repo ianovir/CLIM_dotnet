@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLIM Demo", "CLIM Demo\CLIM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIM_FW", "CLIM FW\CLIM_FW.csproj", "{7598C32C-3533-4829-9586-D9528CA699DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIMTests", "CLIMTests\CLIMTests.csproj", "{D6C16D60-3D5D-4EF9-87BA-8FF9E786E1A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7598C32C-3533-4829-9586-D9528CA699DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7598C32C-3533-4829-9586-D9528CA699DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7598C32C-3533-4829-9586-D9528CA699DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6C16D60-3D5D-4EF9-87BA-8FF9E786E1A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C16D60-3D5D-4EF9-87BA-8FF9E786E1A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C16D60-3D5D-4EF9-87BA-8FF9E786E1A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C16D60-3D5D-4EF9-87BA-8FF9E786E1A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

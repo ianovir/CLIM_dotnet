@@ -13,10 +13,9 @@ namespace CLIM_Demo
 
             Engine engine = new Engine("CLIM .net core demo");
 
-            Menu mainMenu = engine.BuildMenu("Main menu");
+            Menu mainMenu = new Menu("Main menu", engine);
             mainMenu.Description = "List of strings example";
-            mainMenu.AddEntry(new Entry("List values") {
-                OnAction = ()=>{
+            mainMenu.AddEntry(new Entry("List values", ()=>{
                     if (values.Count != 0)
                     {
                         engine.Print("Values:");
@@ -27,46 +26,28 @@ namespace CLIM_Demo
                     else {
                         engine.Print("--list empty--");
                     }
-                }
-            });
+                })
+            );
 
 
-            mainMenu.AddEntry(new Entry("Add value") {
-                OnAction = () => {
+            mainMenu.AddEntry("Add value", () => {
                     engine.Print("Type new value:");
                     string newVal = engine.ForceRead();
-
-                    //build a nested menu
-                    Menu addMenu = engine.BuildMenu("'Add' options", "back");
-                    addMenu.Description = "Choose insert position";
                     values.Add(newVal);
                 }           
-            });
+            );
 
-            mainMenu.AddEntry(new Entry("Remove value")
-            {
-                OnAction = () => {
+            mainMenu.AddEntry("Remove value", () => {
                     engine.Print("Remove index: ");
                     int index = -1;
                     int.TryParse(engine.ForceRead(), out index);
                     if (index >= 0) values.RemoveAt(index);
                 }
-            });
+            );
 
-            Menu secondMenu = engine.BuildMenu("Second menu", "cancel");
-
-            secondMenu.AddEntry(new Entry("Pop this menu") { 
-                OnAction= () => {
-                    engine.PopMenu();
-                }
-            });
-
-            secondMenu.AddEntry(new Entry("Another action")
-            {
-                OnAction = () => {
-                    //do nothing
-                }
-            });
+            Menu secondMenu = new Menu("Second menu", "cancel", engine);
+            secondMenu.AddEntry("Pop this menu", () =>  engine.PopMenu());
+            secondMenu.AddEntry("Another action", () => { });
 
             //adding secondMenu to mainMenu as Entry
             mainMenu.AddSubMenu(secondMenu);
@@ -76,7 +57,7 @@ namespace CLIM_Demo
             engine.Start();
 
             //just blocking...
-             while (engine.IsRunning()) { }
+            while (engine.IsRunning()) ;
 
 
         }

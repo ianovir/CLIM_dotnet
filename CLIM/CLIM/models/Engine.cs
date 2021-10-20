@@ -15,11 +15,12 @@ namespace CLIM.models
 
         public string Name { get; protected set; }
         public Menu CurrentMenu { get; private set; }
-
         public InputStream InStream { get; set; }
         public IOutputStream OutStream { get; set; }
+        public int MenusCount => menus.Count;
 
         private Stack<Menu> menus;
+
         private bool running;
 
         private readonly object syncLock;
@@ -80,6 +81,7 @@ namespace CLIM.models
         /// </summary>
         /// <param name="name">the name of the new menu</param>
         /// <returns>the new built menu</returns>
+        [Obsolete]
         public Menu BuildMenu(string name) {
             return new Menu(name, this);
         }
@@ -91,8 +93,36 @@ namespace CLIM.models
         /// <param name="name">the name of the new menu</param>
         /// <param name="exitText">the text for the exit entry</param>
         /// <returns>the new built menu</returns>
+        [Obsolete]
         public Menu BuildMenu(string name, string exitText) {
             return new Menu(name, exitText, this);
+        }
+
+        /// <summary>
+        /// Creates a new menu referencing the current engine;
+        /// The menu will be added at the top of stack automatically.
+        /// </summary>
+        /// <param name="name">the name of the new menu</param>
+        /// <returns>the new built menu</returns>
+        public Menu BuildMenuOnTop(string name)
+        {
+            Menu m = new Menu(name, this);
+            AddOnTop(m);
+            return m;
+        }
+
+        /// <summary>
+        /// Creates a new menu referencing the current engine; 
+        /// The menu will be added at the top of stack automatically.
+        /// </summary>
+        /// <param name="name">the name of the new menu</param>
+        /// <param name="exitText">the text for the exit entry</param>
+        /// <returns>the new built menu</returns>
+        public Menu BuildMenuOnTop(string name, string exitText)
+        {
+            Menu m = new Menu(name, exitText, this);
+            AddOnTop(m);
+            return m;
         }
 
         /// <summary>
@@ -149,9 +179,11 @@ namespace CLIM.models
 
         private void printHUT()
         {
-            Thread.Sleep(500);
-            OutStream.OnOutput(CurrentMenu.GetHUT());
+            if (CurrentMenu != null) { 
+                OutStream.OnOutput(CurrentMenu.GetHUT());
+            }
         }
+               
 
     }
 }

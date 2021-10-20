@@ -56,15 +56,15 @@ Engine engine = new Engine("CLIM DEMO");
 
 To start the engine:
 ```csharp
-engine.start();
+engine.Start();
 ```
 
 ### Menu
 A `Menu` is a list of entries.
 
-The simplest way to create a menu is building it from the engine:
+To create a menu:
 ```csharp
-Menu mainMenu = engine.BuildMenu("Main menu");
+Menu mainMenu = new Menu("Main menu", engine);
 ```
 
 Then add as many entries as you want:
@@ -74,7 +74,7 @@ mainMenu.AddEntry(newEntry);
 
 Or add a sub-menu as entry:
 ```csharp
-Menu secondMenu = engine.BuildMenu("Second menu", "cancel");
+Menu secondMenu = new Menu("Second menu", "cancel");
 //...
 mainMenu.AddSubMenu(secondMenu);
 ```
@@ -84,16 +84,25 @@ Finally add the menu to the engine:
 engine.AddOnTop(mainMenu);
 ```
 
+A manu can easily be created with
+```csharp
+Menu myMenu = engine.BuildMenuOnTop("Menu title");
+```
+
 ### Entry
 An `Entry` represents an option the user can choose. You need to implement the `OnAction()` action of an entry in order to specify its action.
 
 To create an Entry:
 ```csharp
-Entry newEntry = new Entry("New Entry") {
-	OnAction = () =>{
+Entry newEntry = new Entry("Entry name", () =>{
 		//implement entry's action...
 	}
-};
+);
+```
+
+or by using Menu:
+```csharp
+menu.AddEntry("Entry name", ()=>{/**do stuff**/});
 ```
 
 ### Streams

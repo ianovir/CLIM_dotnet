@@ -9,14 +9,17 @@ namespace CLIM.models
     /// </summary>
     public class Entry
     {
-
         public string Name { get; protected set; }
         public bool Visible { get; set; }
 
-        public Entry(string name)
+        [Obsolete]
+        public Entry(string name): this(name, null){}
+
+        public Entry(string name, Action action)
         {
             this.Name = name;
             Visible = true;
+            this.OnAction = action;
         }
 
         /// <summary>

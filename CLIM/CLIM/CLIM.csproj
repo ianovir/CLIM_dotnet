@@ -5,13 +5,13 @@
     <Authors>ianovir</Authors>
     <Product>CLIM dotnet</Product>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>Copyright 2020 - ianovir.com</Copyright>
+    <Copyright>Copyright 2021 - ianovir.com</Copyright>
     <Description>Command line interface menu engine for .net core.</Description>
     <PackageId>CLIM</PackageId>
     <Company>ianovir.com</Company>
     <PackageIcon></PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>1.2.1</Version>
+    <Version>1.3</Version>
   </PropertyGroup>
 
 </Project>

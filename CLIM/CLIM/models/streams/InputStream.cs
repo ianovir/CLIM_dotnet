@@ -9,7 +9,7 @@ namespace CLIM.models.streams
     {
         protected Engine engine;
         bool run = false;
-        Thread thread;
+        Thread thread;        
 
         public InputStream(Engine subscriber)
         {
