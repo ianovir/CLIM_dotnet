@@ -4,9 +4,13 @@ using System.Text;
 
 namespace CLIM.models.streams
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <author>Sebastiano Campisi (ianovir)</author>
     public class SystemOutputStream : IOutputStream
     {
-        public void OnOutput(string msg)
+        public void Put(string msg)
         {
             Console.WriteLine(msg);
         }

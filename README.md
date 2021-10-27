@@ -102,8 +102,9 @@ Entry newEntry = new Entry("Entry name", () =>{
 
 or by using Menu:
 ```csharp
-menu.AddEntry("Entry name", ()=>{/**do stuff**/});
+Entry newEntry = menu.AddEntry("Entry name", ()=>{/**do stuff**/});
 ```
+Change Entry's visibility to hide/show it on menu list.
 
 ### Streams
 CLIM's `Stream` is an object used for streaming input and output data. By default, the `Engine` uses `ScannerInputStream` and `SystemOutputStream` which uses the standard Console. You can define your custom streams by implementing the `InputStream` and `IOutputStream` classes.
@@ -115,5 +116,5 @@ engine.OutStream = customOutputStream;
 ```
 
 # Copyright
-Copyright(c) 2020 Sebastiano Campisi - [ianovir.com](https://ianovir.com). 
+Copyright(c) 2021 Sebastiano Campisi - [ianovir.com](https://ianovir.com). 
 Read LICENSE file for more details.

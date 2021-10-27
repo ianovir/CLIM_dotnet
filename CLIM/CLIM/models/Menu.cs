@@ -8,6 +8,7 @@ namespace CLIM.models
     /// <summary>
     /// A menu represents a list of entries.
     /// </summary>
+    /// <author>Sebastiano Campisi (ianovir)</author>
     public class Menu
     {
         public string Name { get; protected set; }
@@ -17,7 +18,22 @@ namespace CLIM.models
         public string ExitText { get; protected set; }
         public bool IsRemoved { get; protected set; }
         public bool RemoveOnInvalidChoice { get; set; }
-        public int EntriesCount => mEntries.Count;
+
+        protected List<Entry> VisibleEntries {
+            get {
+                return mEntries.Where(e => e.Visible).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Number of visible entries
+        /// </summary>
+        public int EntriesCount => VisibleEntries.Count+1;
+
+        /// <summary>
+        /// Number of all entries (visible or not)
+        /// </summary>
+        public int TotalEntriesCount => mEntries.Count+1;
         public Action ExitAction { get; set; }
         private Engine mEngine;
         private LinkedList<Entry> mEntries;
@@ -49,10 +65,12 @@ namespace CLIM.models
         /// </summary>
         /// <param name="eName">Entry name</param>
         /// <param name="eAction">Entry action</param>
-        public void AddEntry(string eName, Action eAction) {
-            AddEntry(new Entry(eName, eAction));
+        /// <returns>The new added Entry</returns>
+        public Entry AddEntry(string eName, Action eAction) {
+            Entry newEntry = new Entry(eName, eAction);
+            AddEntry(newEntry);
+            return newEntry;
         }
-
 
         /// <summary>
         /// Add a new menu as sub entry with a custom entry text (different from menu's name)
@@ -82,17 +100,14 @@ namespace CLIM.models
         /// <param name="entry">the index of the entry in the menu</param>
         /// <returns>True if an action has been properly triggered, False otherwise</returns>
         public bool OnChoice(int entry) {
-            if (entry == mEntries.Count) return !(IsRemoved = true);
-            if (entry < 0 || entry >= mEntries.Count) {
-                if (entry == mEntries.Count) {
-                    //exit Action
-                    ExitAction?.Invoke();
-                }
+
+            if (isInvalidEntryChoice(entry)) {
+                if (IsExitChoice(entry)) ExitAction?.Invoke();
                 IsRemoved = RemoveOnInvalidChoice || IsExitChoice(entry);
                 return false;
             }
 
-            Entry cEntry = mEntries.ElementAt(entry);
+            Entry cEntry = VisibleEntries.ElementAt(entry);
             if (cEntry != null) {
                 mEngine.Print(cEntry.Name);
                 cEntry.OnAction?.Invoke();
@@ -103,9 +118,14 @@ namespace CLIM.models
             return false;
         }
 
+        private bool isInvalidEntryChoice(int entry)
+        {
+            return entry < 0 || entry >= VisibleEntries.Count;
+        }
+
         private bool IsExitChoice(int entry)
         {
-            return entry == mEntries.Count;
+            return entry == VisibleEntries.Count;
         }
 
         /// <summary>
@@ -120,7 +140,7 @@ namespace CLIM.models
                 sb.Append(Description).Append("\n");
             }
             int men =0;
-            foreach (Entry me in mEntries) { 
+            foreach (Entry me in VisibleEntries) { 
                 sb.Append(men++).Append(". ").Append(me.Name).Append("\n");
             }
             sb.Append(men).Append(". ").Append(ExitText).Append("\n\n>>");

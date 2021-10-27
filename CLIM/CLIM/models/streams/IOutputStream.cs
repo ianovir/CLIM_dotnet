@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CLIM.models.streams
+﻿namespace CLIM.models.streams
 {
+    /// <summary>
+    /// Output Stream interface for the <see cref="Engine"/>
+    /// </summary>
+    /// <author>Sebastiano Campisi (ianovir)</author>
     public interface IOutputStream : IStream
     {
-        void OnOutput(string msg);
+        void Put(string msg);
     }
 }

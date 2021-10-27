@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CLIM</name>
+    </assembly>
+    <members>
+        <member name="T:CLIM.models.Engine">
+            <summary>
+            The choreographer of the menus' stack.
+            By default, input and output streams are the ScannerInputStream and
+            SystemOutputStream respectively
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="M:CLIM.models.Engine.AddOnTop(CLIM.models.Menu)">
+            <summary>
+            Adds a menu on the top of the stack
+            </summary>
+            <param name="subMenu">the new menu to be added</param>
+        </member>
+        <member name="M:CLIM.models.Engine.PopMenu">
+            <summary>
+            Removes the menu on top
+            </summary>
+        </member>
+        <member name="M:CLIM.models.Engine.OnChoice(System.Int32)">
+            <summary>
+            Forces the call to the action corresponding to the chosen entry
+            </summary>
+            <param name="entry">the index of the entry in the current menu</param>
+        </member>
+        <member name="M:CLIM.models.Engine.BuildMenu(System.String)">
+            <summary>
+            Creates a new menu referencing the current engine;
+            Note that the menu won't be added to the stack automatically.
+            </summary>
+            <param name="name">the name of the new menu</param>
+            <returns>the new built menu</returns>
+        </member>
+        <member name="M:CLIM.models.Engine.BuildMenu(System.String,System.String)">
+            <summary>
+            Creates a new menu referencing the current engine; 
+            Note that the menu won't be added to the stack automatically.
+            </summary>
+            <param name="name">the name of the new menu</param>
+            <param name="exitText">the text for the exit entry</param>
+            <returns>the new built menu</returns>
+        </member>
+        <member name="M:CLIM.models.Engine.BuildMenuOnTop(System.String)">
+            <summary>
+            Creates a new menu referencing the current engine;
+            The menu will be added at the top of stack automatically.
+            </summary>
+            <param name="name">the name of the new menu</param>
+            <returns>the new built menu</returns>
+        </member>
+        <member name="M:CLIM.models.Engine.BuildMenuOnTop(System.String,System.String)">
+            <summary>
+            Creates a new menu referencing the current engine; 
+            The menu will be added at the top of stack automatically.
+            </summary>
+            <param name="name">the name of the new menu</param>
+            <param name="exitText">the text for the exit entry</param>
+            <returns>the new built menu</returns>
+        </member>
+        <member name="M:CLIM.models.Engine.Start">
+            <summary>
+            Starts the current engine
+            </summary>
+        </member>
+        <member name="M:CLIM.models.Engine.Stop">
+            <summary>
+            Stops the current engine
+            </summary>
+        </member>
+        <member name="M:CLIM.models.Engine.ForceRead">
+            <summary>
+            Forces the inputstream to be read
+            </summary>
+            <returns>the read line</returns>
+        </member>
+        <member name="M:CLIM.models.Engine.ForceRead(System.String)">
+            <summary>
+            Forces the inputstream to be read
+            </summary>
+            <param name="msg">Message to print before read</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLIM.models.Engine.Print(System.String)">
+            <summary>
+            Sends a message to the outputstream
+            </summary>
+            <param name="msg">the content to show</param>
+        </member>
+        <member name="T:CLIM.models.Entry">
+            <summary>
+            An Entry is the basic element composing a menu.
+            </summary> 
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="F:CLIM.models.Entry.OnAction">
+            <summary>
+            The action (to be implemented) for the entry
+            </summary>
+        </member>
+        <member name="T:CLIM.models.Menu">
+            <summary>
+            A menu represents a list of entries.
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="P:CLIM.models.Menu.EntriesCount">
+            <summary>
+            Number of visible entries
+            </summary>
+        </member>
+        <member name="P:CLIM.models.Menu.TotalEntriesCount">
+            <summary>
+            Number of all entries (visible or not)
+            </summary>
+        </member>
+        <member name="M:CLIM.models.Menu.AddEntry(CLIM.models.Entry)">
+            <summary>
+            Adds a new entry to the menu.
+            </summary>
+            <param name="entry">the new entry</param>
+        </member>
+        <member name="M:CLIM.models.Menu.AddEntry(System.String,System.Action)">
+            <summary>
+            Adds a new entry to the menu
+            </summary>
+            <param name="eName">Entry name</param>
+            <param name="eAction">Entry action</param>
+            <returns>The new added Entry</returns>
+        </member>
+        <member name="M:CLIM.models.Menu.AddSubMenu(CLIM.models.Menu,System.String)">
+            <summary>
+            Add a new menu as sub entry with a custom entry text (different from menu's name)
+            </summary>
+            <param name="subMenu">The new menu to be added</param>
+            <param name="entryText">the custom entry text if different from menu's name</param>
+        </member>
+        <member name="M:CLIM.models.Menu.AddSubMenu(CLIM.models.Menu)">
+            <summary>
+            Add a new menu as sub entry
+            </summary>
+            <param name="subMenu">The new menu to be added</param>
+        </member>
+        <member name="M:CLIM.models.Menu.OnChoice(System.Int32)">
+            <summary>
+            Forces the call to the action corresponding to the chosen entry
+            </summary>
+            <param name="entry">the index of the entry in the menu</param>
+            <returns>True if an action has been properly triggered, False otherwise</returns>
+        </member>
+        <member name="M:CLIM.models.Menu.GetHUT">
+            <summary>
+            Retrieves the HUT of the current menu
+            </summary>
+            <returns>the HUT of the current menu</returns>
+        </member>
+        <member name="T:CLIM.models.streams.InputStream">
+            <summary>
+            Input Stream for the <see cref="T:CLIM.models.Engine"/>
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="M:CLIM.models.streams.InputStream.ForceRead">
+            <summary>
+            Forces the read from the stream. Please, consider that this call will be called on separate thread. 
+            This call can be supposed to be blocking.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CLIM.models.streams.IOutputStream">
+            <summary>
+            Output Stream interface for the <see cref="T:CLIM.models.Engine"/>
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="T:CLIM.models.streams.IStream">
+            <summary>
+            Stream interface. See <see cref="T:CLIM.models.streams.InputStream"/> and <see cref="T:CLIM.models.streams.IOutputStream"/>
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="T:CLIM.models.streams.ScannerInputStream">
+            <summary>
+            
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+        <member name="T:CLIM.models.streams.SystemOutputStream">
+            <summary>
+            
+            </summary>
+            <author>Sebastiano Campisi (ianovir)</author>
+        </member>
+    </members>
+</doc>
