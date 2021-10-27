@@ -6,7 +6,8 @@ namespace CLIM.models
 {
     /// <summary>
     /// An Entry is the basic element composing a menu.
-    /// </summary>
+    /// </summary> 
+    /// <author>Sebastiano Campisi (ianovir)</author>
     public class Entry
     {
         public string Name { get; protected set; }

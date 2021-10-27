@@ -4,6 +4,10 @@ using System.Text;
 
 namespace CLIM.models.streams
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <author>Sebastiano Campisi (ianovir)</author>
     public class ScannerInputStream : InputStream
     {
         public ScannerInputStream(Engine subscriber):base(subscriber)

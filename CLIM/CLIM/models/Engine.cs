@@ -11,6 +11,7 @@ namespace CLIM.models
     /// By default, input and output streams are the ScannerInputStream and
     /// SystemOutputStream respectively
     /// </summary>
+    /// <author>Sebastiano Campisi (ianovir)</author>
     public class Engine {
 
         public string Name { get; protected set; }
@@ -166,21 +167,32 @@ namespace CLIM.models
         }
 
         /// <summary>
+        /// Forces the inputstream to be read
+        /// </summary>
+        /// <param name="msg">Message to print before read</param>
+        /// <returns></returns>
+        public string ForceRead(string msg)
+        {
+            OutStream.Put(msg);
+            return InStream.ForceRead();
+        }
+
+        /// <summary>
         /// Sends a message to the outputstream
         /// </summary>
         /// <param name="msg">the content to show</param>
         public void Print(string msg) {
-            OutStream.OnOutput(msg);
+            OutStream.Put(msg);
         }
 
         private void present() {
-            OutStream.OnOutput(Name);
+            OutStream.Put(Name);
         }
 
         private void printHUT()
         {
             if (CurrentMenu != null) { 
-                OutStream.OnOutput(CurrentMenu.GetHUT());
+                OutStream.Put(CurrentMenu.GetHUT());
             }
         }
                

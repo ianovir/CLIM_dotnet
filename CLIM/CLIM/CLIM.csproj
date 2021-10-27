@@ -11,7 +11,11 @@
     <Company>ianovir.com</Company>
     <PackageIcon></PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>1.3.0.2</Version>
+    <Version>1.3.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>H:\Workspace\Github\CLIM_dotnet\CLIM\CLIM\CLIM.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
