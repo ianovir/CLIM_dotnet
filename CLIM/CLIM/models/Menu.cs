@@ -107,7 +107,7 @@ namespace CLIM.models
                 return false;
             }
 
-            Entry cEntry = mEntries.ElementAt(entry);
+            Entry cEntry = VisibleEntries.ElementAt(entry);
             if (cEntry != null) {
                 mEngine.Print(cEntry.Name);
                 cEntry.OnAction?.Invoke();
@@ -140,7 +140,7 @@ namespace CLIM.models
                 sb.Append(Description).Append("\n");
             }
             int men =0;
-            foreach (Entry me in mEntries) { 
+            foreach (Entry me in VisibleEntries) { 
                 sb.Append(men++).Append(". ").Append(me.Name).Append("\n");
             }
             sb.Append(men).Append(". ").Append(ExitText).Append("\n\n>>");

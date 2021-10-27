@@ -52,6 +52,8 @@ namespace CLIM_Demo
             //adding secondMenu to mainMenu as Entry
             mainMenu.AddSubMenu(secondMenu);
 
+            mainMenu.AddSubMenu(buildToggleEntriesMenu(engine));
+
             //adding main menu on top of engine
             engine.AddOnTop(mainMenu);
             engine.Start();
@@ -59,7 +61,19 @@ namespace CLIM_Demo
             //just blocking...
             while (engine.IsRunning()) ;
 
+        }
 
+        private static Menu buildToggleEntriesMenu(Engine e)
+        {
+            Menu menu = new Menu("Toggle Entries", e);
+            Entry a = menu.AddEntry("Entry A", null);
+            Entry d = new Entry("Entry D", null);
+
+            menu.AddEntry("Toggle Entry A", ()=> a.Visible = !a.Visible);
+            menu.AddEntry("Toggle Entry D", ()=> d.Visible = !d.Visible);
+
+            menu.AddEntry(d);
+            return menu;
         }
     }
 }
