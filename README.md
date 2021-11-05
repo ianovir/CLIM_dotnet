@@ -84,7 +84,7 @@ Finally add the menu to the engine:
 engine.AddOnTop(mainMenu);
 ```
 
-A manu can easily be created with
+A menu can easily be created with
 ```csharp
 Menu myMenu = engine.BuildMenuOnTop("Menu title");
 ```
