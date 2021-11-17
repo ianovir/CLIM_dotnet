@@ -11,6 +11,9 @@ namespace CLIM.models
     /// <author>Sebastiano Campisi (ianovir)</author>
     public class Menu
     {
+        private readonly string HEADER_SEPARATOR = "-------------";
+        private readonly string DEFAULT_EXIT = "exit";
+
         public string Name { get; protected set; }
         public string Description { get; set; }
         public string HeaderSeparator { get; set; }
@@ -30,6 +33,7 @@ namespace CLIM.models
         /// </summary>
         public int EntriesCount => VisibleEntries.Count+1;
 
+
         /// <summary>
         /// Number of all entries (visible or not)
         /// </summary>
@@ -43,8 +47,8 @@ namespace CLIM.models
             this.Name = name;
             mEntries = new LinkedList<Entry>();
             this.mEngine = engine;
-            ExitText = "exit";
-            HeaderSeparator = "-------------";
+            ExitText = DEFAULT_EXIT;
+            HeaderSeparator = HEADER_SEPARATOR;
         }
 
         public Menu(String name, String exitText, Engine engine):this(name, engine)
@@ -97,25 +101,34 @@ namespace CLIM.models
         /// <summary>
         /// Forces the call to the action corresponding to the chosen entry
         /// </summary>
-        /// <param name="entry">the index of the entry in the menu</param>
-        /// <returns>True if an action has been properly triggered, False otherwise</returns>
-        public bool OnChoice(int entry) {
+        /// <param name="entryIndex">the index of the entry in the menu</param>
+        public void OnChoice(int entryIndex) {
 
-            if (isInvalidEntryChoice(entry)) {
-                if (IsExitChoice(entry)) ExitAction?.Invoke();
-                IsRemoved = RemoveOnInvalidChoice || IsExitChoice(entry);
-                return false;
+            if (isInvalidEntryChoice(entryIndex))
+            {
+                TryExecuteExitAction(entryIndex);
             }
+            else
+            {
+                ExecuteEntry(entryIndex);
+            }
+        }
 
+        private void TryExecuteExitAction(int entryIndex)
+        {
+            if (IsExitChoice(entryIndex)) ExitAction?.Invoke();
+            IsRemoved = RemoveOnInvalidChoice || IsExitChoice(entryIndex);
+        }
+
+        private void ExecuteEntry(int entry)
+        {
             Entry cEntry = VisibleEntries.ElementAt(entry);
-            if (cEntry != null) {
+            if (cEntry != null)
+            {
                 mEngine.Print(cEntry.Name);
                 cEntry.OnAction?.Invoke();
                 IsRemoved = RemoveOnAction;
-                return true;
             }
-
-            return false;
         }
 
         private bool isInvalidEntryChoice(int entry)
@@ -132,21 +145,44 @@ namespace CLIM.models
         /// Retrieves the HUT of the current menu
         /// </summary>
         /// <returns>the HUT of the current menu</returns>
-        public string GetHUT() {
-            StringBuilder sb = new StringBuilder();
-            if (!string.IsNullOrEmpty(HeaderSeparator)) sb.Append("\n").Append(HeaderSeparator).Append("\n");
-            sb.Append(Name.ToUpper()).Append("\n");
-            if (!string.IsNullOrEmpty(Description)) { 
-                sb.Append(Description).Append("\n");
-            }
-            int men =0;
-            foreach (Entry me in VisibleEntries) { 
-                sb.Append(men++).Append(". ").Append(me.Name).Append("\n");
-            }
-            sb.Append(men).Append(". ").Append(ExitText).Append("\n\n>>");
+        public string GetHUT()
+        {
+            var sb = new StringBuilder();
+            PutHutTitle(sb);
+            PutHutDescription(sb);
+            int lastIndex = PutHUTEntries(sb);
+            PutHutTrailer(sb, lastIndex);
             return sb.ToString();
         }
 
+        private void PutHutTrailer(StringBuilder sb, int lastIndex)
+        {
+            sb.Append(" ").Append(lastIndex).Append(". ").Append(ExitText).Append("\n\n>>");
+        }
+
+        private int PutHUTEntries(StringBuilder sb, int startingIndex = 0)
+        {
+            foreach (Entry me in VisibleEntries)
+            {
+                sb.Append(" ").Append(startingIndex++).Append(". ").Append(me.Name).Append("\n");
+            }
+
+            return startingIndex;
+        }
+
+        private void PutHutDescription(StringBuilder sb)
+        {
+            if (!string.IsNullOrEmpty(Description))
+            {
+                sb.Append(Description).Append("\n");
+            }
+        }
+
+        private void PutHutTitle(StringBuilder sb)
+        {
+            if (!string.IsNullOrEmpty(HeaderSeparator)) sb.Append("\n").Append(HeaderSeparator).Append("\n");
+            sb.Append(Name.ToUpper()).Append("\n");
+        }
 
 
     }

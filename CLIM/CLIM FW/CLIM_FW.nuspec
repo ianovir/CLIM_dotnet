@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CLIM_FW</id>
-    <version>1.3.1.0</version>
+    <version>1.3.2.0</version>
     <title>CLIM dotnet fw</title>
 	<owners>ianovir.com</owners>
     <authors>ianovir</authors>

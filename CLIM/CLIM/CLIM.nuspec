@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ianovir/CLIM_dotnet</projectUrl>
     <iconUrl>https://ianovir.com/wp-content/uploads/2020/12/clim_icon.png</iconUrl>
     <description>Command line interface menu engine for .net core</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Engine.Wait()</releaseNotes>
     <copyright>Copyright 2021 - ianovir.com</copyright>
     <tags>CLI CLIM menu .net_core ianovir</tags>
   </metadata>
