@@ -1,7 +1,6 @@
 ﻿using CLIM.models.streams;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace CLIM.models
@@ -14,6 +13,7 @@ namespace CLIM.models
     /// <author>Sebastiano Campisi (ianovir)</author>
     public class Engine {
 
+        private readonly int WAIT_LOOP_MS = 500;
         public string Name { get; protected set; }
         public Menu CurrentMenu { get; private set; }
         public InputStream InStream { get; set; }
@@ -24,7 +24,7 @@ namespace CLIM.models
 
         private bool running;
 
-        private readonly object syncLock;
+        private readonly object startStopSyncLock;
 
         public Engine(string name)
         {
@@ -32,7 +32,7 @@ namespace CLIM.models
             menus = new Stack<Menu>();
             InStream = new ScannerInputStream(this);
             OutStream = new SystemOutputStream();
-            syncLock = new object();
+            startStopSyncLock = new object();
         }
 
         /// <summary>
@@ -59,19 +59,30 @@ namespace CLIM.models
         /// Forces the call to the action corresponding to the chosen entry
         /// </summary>
         /// <param name="entry">the index of the entry in the current menu</param>
-        public void OnChoice(int entry) {
+        public void OnChoice(int entry)
+        {
             CurrentMenu.OnChoice(entry);
-            if (CurrentMenu.IsRemoved) {
+            ManageMenuRemoval();
+            StopOrContinue();
+        }
+
+        private void ManageMenuRemoval()
+        {
+            if (CurrentMenu.IsRemoved)
+            {
                 menus.Pop();
                 CurrentMenu = menus.Count == 0 ? null : menus.Peek();
             }
+        }
 
-            //engine stops if no more menus
+        private void StopOrContinue()
+        {
             if (CurrentMenu == null)
             {
                 Stop();
             }
-            else {
+            else
+            {
                 printHUT();
             }
         }
@@ -131,7 +142,7 @@ namespace CLIM.models
         /// </summary>
         public void Start()
         {
-            lock (syncLock) {
+            lock (startStopSyncLock) {
                 running = true;
                 InStream.Open();
                 OutStream.Open();
@@ -144,7 +155,7 @@ namespace CLIM.models
         /// Stops the current engine
         /// </summary>
         public void Stop() {
-            lock (syncLock) {
+            lock (startStopSyncLock) {
                 running= false;
                 InStream.Close();
                 OutStream.Close();            
@@ -153,9 +164,7 @@ namespace CLIM.models
 
         public bool IsRunning()
         {
-            lock (syncLock) { 
-                return running;
-            }
+            return running;
         }
 
         /// <summary>
@@ -193,6 +202,15 @@ namespace CLIM.models
         {
             if (CurrentMenu != null) { 
                 OutStream.Put(CurrentMenu.GetHUT());
+            }
+        }
+
+        /// <summary>
+        /// Wait for the engine to complete its execution (blocking)
+        /// </summary>
+        public void Wait() {
+            while (IsRunning()) {
+                Thread.Sleep(WAIT_LOOP_MS);
             }
         }
                

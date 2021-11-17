@@ -59,6 +59,11 @@ To start the engine:
 engine.Start();
 ```
 
+To wait for the engine to terminate its execution (blocking call):
+```csharp
+engine.Wait();
+```
+
 ### Menu
 A `Menu` is a list of entries.
 
@@ -84,7 +89,7 @@ Finally add the menu to the engine:
 engine.AddOnTop(mainMenu);
 ```
 
-A manu can easily be created with
+A manu can easily be created with:
 ```csharp
 Menu myMenu = engine.BuildMenuOnTop("Menu title");
 ```

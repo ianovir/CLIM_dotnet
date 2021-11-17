@@ -58,8 +58,7 @@ namespace CLIM_Demo
             engine.AddOnTop(mainMenu);
             engine.Start();
 
-            //just blocking...
-            while (engine.IsRunning()) ;
+            engine.Wait();
 
         }
 
